@@ -1,7 +1,9 @@
 <script>
 	let date = new Date();
 
-	let fetch_url = `https://panchangam.org/global/daily.php?city=Hyderabad&date=${date.getFullYear()}-${date.getUTCMonth() + 1}-${date.getDate()}`;
+	let fetch_url = `https://panchangam.org/global/daily.php?city=Hyderabad&date=${date.getFullYear()}-${
+		date.getUTCMonth() + 1
+	}-${date.getDate()}`;
 
 	import { onMount } from 'svelte';
 	let tara_data = {};
@@ -260,7 +262,10 @@
 			Copyright © 2024 - All right reserved by <a
 				href="https://github.com/TheOnlyWayUp"
 				class="link font-semibold">TheOnlyWayUp</a
-			>. This is <a href="" class="link">Free and Open-Source Software.</a>.
+			>. This is
+			<a href="https://github.com/TheOnlyWayUp/PanchangamLite" class="link"
+				>Free and Open-Source Software.</a
+			>.
 		</p>
 	</aside>
 </footer>
