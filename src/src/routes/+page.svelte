@@ -259,7 +259,7 @@
 <footer class="footer footer-center bg-base-300 text-base-content sticky bottom-0 z-50 p-4">
 	<aside>
 		<p>
-			Copyright © 2024 - All right reserved by <a
+			Copyright © 2024 - All rights reserved by <a
 				href="https://github.com/TheOnlyWayUp"
 				class="link font-semibold">TheOnlyWayUp</a
 			>. This is
