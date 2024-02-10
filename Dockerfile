@@ -7,9 +7,8 @@ COPY src/package*.json .
 RUN rm -rf node_modules
 RUN rm -rf build
 RUN npm install
-RUN npm ci --omit dev
-RUN npm run build
 COPY src/. .
+RUN npm run build
 
 # Thanks https://stackoverflow.com/q/76988450
 
