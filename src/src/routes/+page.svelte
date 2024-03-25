@@ -1,22 +1,26 @@
 <script>
-	let date = new Date();
-
-	let fetch_date = `${date.getFullYear()}-${date.getUTCMonth() + 1}-${date.getDate()}`;
+	let to_check_date = new Date();
 
 	import { onMount } from 'svelte';
 	let tara_data = {};
 	let loaded = false;
 	let selected_star = 'Chitra';
+	let checked_date_string = '';
 
 	if (!String.prototype.strip) {
-		// ! Thanks https://stackoverflow.com/a/20890838/12107639
+		// ! Thanks https://stackoverflow.com/a/20890838
 		String.prototype.strip = function (string) {
 			var escaped = string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
 			return this.replace(RegExp('^[' + escaped + ']+|[' + escaped + ']+$', 'gm'), '');
 		};
 	}
 
-	onMount(async () => {
+	async function update_data_for_(date) {
+		loaded = false;
+
+		let fetch_date = `${date.getFullYear()}-${date.getUTCMonth() + 1}-${date.getDate()}`;
+		checked_date_string = fetch_date;
+
 		let response = await fetch(`/?url=${btoa(fetch_date)}`);
 		let html = await response.text();
 
@@ -86,7 +90,9 @@
 		return () => {
 			clearInterval(interval);
 		};
-	});
+	}
+
+	onMount(async () => await update_data_for_(to_check_date));
 
 	let where_taras = {
 		Ashwini: 0,
@@ -179,7 +185,8 @@
 			<div class="text-5xl font-thin">
 				<h1>
 					Date: <span class="font-normal"
-						>{date.getDate()}/{date.getUTCMonth() + 1}/{date.getFullYear()}</span
+						>{to_check_date.getDate()}/{to_check_date.getUTCMonth() +
+							1}/{to_check_date.getFullYear()}</span
 					>
 				</h1>
 				<h2 class="font-thin">
@@ -190,8 +197,38 @@
 				{#if loaded}
 					<div class="space-y-5">
 						<h1 class="py-3 text-3xl font-medium">
-							{tara_data.city} <a class="link font-normal" href={fetch_date}>(source)</a>
+							{tara_data.city}
+							<a
+								class="link font-normal"
+								href={`https://panchangam.org/global/daily.php?city=Hyderabad&date=${checked_date_string}`}
+								>(source)</a
+							>
 						</h1>
+						<div class="flex w-full space-x-10">
+							<button
+								class="btn btn-secondary"
+								on:click={async () => {
+									to_check_date.setDate(to_check_date.getDate() - 1); // Thanks https://stackoverflow.com/a/9444776
+									to_check_date = to_check_date;
+									await update_data_for_(to_check_date);
+								}}>Previous Day</button
+							>
+							<button
+								class="btn btn-secondary"
+								on:click={async () => {
+									to_check_date = new Date();
+									await update_data_for_(to_check_date);
+								}}>Today</button
+							>
+							<button
+								class="btn btn-secondary"
+								on:click={async () => {
+									to_check_date.setDate(to_check_date.getDate() + 1); // Thanks https://stackoverflow.com/a/9444776
+									to_check_date = to_check_date;
+									await update_data_for_(to_check_date);
+								}}>Next Day</button
+							>
+						</div>
 
 						<div class="space-y-2">
 							<h2 class="text-2xl">Nakshatralu</h2>
