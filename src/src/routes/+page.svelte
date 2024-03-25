@@ -1,9 +1,7 @@
 <script>
 	let date = new Date();
 
-	let fetch_url = `https://panchangam.org/global/daily.php?city=Hyderabad&date=${date.getFullYear()}-${
-		date.getUTCMonth() + 1
-	}-${date.getDate()}`;
+	let fetch_date = `${date.getFullYear()}-${date.getUTCMonth() + 1}-${date.getDate()}`;
 
 	import { onMount } from 'svelte';
 	let tara_data = {};
@@ -19,7 +17,7 @@
 	}
 
 	onMount(async () => {
-		let response = await fetch(`/?url=${btoa(fetch_url)}`);
+		let response = await fetch(`/?url=${btoa(fetch_date)}`);
 		let html = await response.text();
 
 		var parser = new DOMParser();
@@ -192,7 +190,7 @@
 				{#if loaded}
 					<div class="space-y-5">
 						<h1 class="py-3 text-3xl font-medium">
-							{tara_data.city} <a class="link font-normal" href={fetch_url}>(source)</a>
+							{tara_data.city} <a class="link font-normal" href={fetch_date}>(source)</a>
 						</h1>
 
 						<div class="space-y-2">
