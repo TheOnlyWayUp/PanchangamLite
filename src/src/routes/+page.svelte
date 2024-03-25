@@ -162,7 +162,23 @@
 
 	function get_safety(nakshatram) {
 		try {
-			return num_status[tarabalam[where_taras[selected_star]][where_taras[nakshatram]]] || {};
+			return (
+				num_status[
+					tarabalam[where_taras[selected_star]][
+						where_taras[
+							nakshatram
+								.replace('Purva', 'P.')
+								.replace('Uttara', 'U.')
+								.replace(' ', '')
+								.replace('Vishaka', 'Vishakha')
+								.replace('Jyeshta', 'Jyestha')
+								.replace('Magha', 'Magham')
+								.replace('Mrigashirsha', 'Mrigashirish')
+								.replace('Krithika', 'Kritika')
+						]
+					]
+				] || {}
+			);
 		} catch (error) {
 			return {};
 		}
@@ -237,9 +253,9 @@
 									<li class="list-item text-xl">
 										<div>
 											<p>
-												<strong>{nakshatram[0]}</strong> ({get_safety(nakshatram[0]).name}: {get_safety(
-													nakshatram[0]
-												).status}) {nakshatram[1]}
+												<strong>{nakshatram[0]}</strong> ({get_safety(nakshatram[0]).name ||
+													'Error, scroll down and refer to table.'}: {get_safety(nakshatram[0])
+													.status || ''}) {nakshatram[1]}
 											</p>
 										</div>
 									</li>
