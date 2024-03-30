@@ -124,6 +124,36 @@
 		Revati: 8
 	};
 
+	let naks_names_in_order = [
+		'Ashwini',
+		'Bharani',
+		'Kritika',
+		'Rohini',
+		'Mrigashirish',
+		'Ardra',
+		'Punarvasu',
+		'Pushya',
+		'Ashlesha',
+		'Magham',
+		'P.Phalguni',
+		'U.Phalguni',
+		'Hasta',
+		'Chitra',
+		'Swati',
+		'Vishakha',
+		'Anuradha',
+		'Jyestha',
+		'Moolam',
+		'P.Shadha',
+		'U.Shadha',
+		'Shravan',
+		'Dhanishtha',
+		'Shatabhisha',
+		'P.Bhadra',
+		'U.Bhadra',
+		'Revati'
+	];
+
 	let nakshatralu = [
 		['Ashwini', 'Magham', 'Moolam'],
 		['Bharani', 'P.Phalguni', 'P.Shadha'],
@@ -293,11 +323,16 @@
 					<span class="label-text">Select your Nakshatram</span>
 				</div>
 				<select
-					class="select select-bordered select-primary w-full max-w-xs"
+					class="select select-bordered select-secondary border-accent w-full max-w-xs"
 					bind:value={selected_star}
 				>
-					{#each Object.keys(where_taras) as tara}
-						<option>{tara}</option>
+					{#each naks_names_in_order as tara}
+						<option
+							>{tara
+								.replace('P.', 'Purva ')
+								.replace('U.', 'Uttara ')
+								.replace('Bhadra', 'Bhadrapada')}</option
+						>
 					{/each}
 				</select>
 			</label>
