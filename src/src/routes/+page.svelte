@@ -175,6 +175,7 @@
 								.replace('Magha', 'Magham')
 								.replace('Mrigashirsha', 'Mrigashirish')
 								.replace('Krithika', 'Kritika')
+								.replace('Moola', 'Moolam')
 						]
 					]
 				] || {}
