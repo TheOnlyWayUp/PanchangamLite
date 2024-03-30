@@ -109,7 +109,7 @@
 		Shravan: 3,
 		Mrigashirish: 4,
 		Chitra: 4,
-		Dhanistha: 4,
+		Dhanishtha: 4,
 		Ardra: 5,
 		Swati: 5,
 		Shatabhisha: 5,
@@ -129,7 +129,7 @@
 		['Bharani', 'P.Phalguni', 'P.Shadha'],
 		['Kritika', 'U.Phalguni', 'U.Shadha'],
 		['Rohini', 'Hasta', 'Shravan'],
-		['Mrigashirish', 'Chitra', 'Dhanistha'],
+		['Mrigashirish', 'Chitra', 'Dhanishtha'],
 		['Ardra', 'Swati', 'Shatabhisha'],
 		['Punarvasu', 'Vishakha', 'P.Bhadra'],
 		['Pushya', 'Anuradha', 'U.Bhadra'],
@@ -161,25 +161,23 @@
 	}; // https://vijayalur.files.wordpress.com/2011/10/tb-explained.gif
 
 	function get_safety(nakshatram) {
+		let converted_nak = nakshatram
+			.replace('Purva', 'P.')
+			.replace('Uttara', 'U.')
+			.replace(' ', '')
+			.replace('Vishaka', 'Vishakha')
+			.replace('Jyeshta', 'Jyestha')
+			.replace('Magha', 'Magham')
+			.replace('Mrigashirsha', 'Mrigashirish')
+			.replace('Krithika', 'Kritika')
+			.replace('Moola', 'Moolam')
+			.replace('Ashadha', 'Shadha')
+			.replace('Shravana', 'Shravan')
+			.replace('Dhanishta', 'Dhanishtha')
+			.replace('Bhadrapada', 'Bhadra');
+		console.log('a', converted_nak);
 		try {
-			return (
-				num_status[
-					tarabalam[where_taras[selected_star]][
-						where_taras[
-							nakshatram
-								.replace('Purva', 'P.')
-								.replace('Uttara', 'U.')
-								.replace(' ', '')
-								.replace('Vishaka', 'Vishakha')
-								.replace('Jyeshta', 'Jyestha')
-								.replace('Magha', 'Magham')
-								.replace('Mrigashirsha', 'Mrigashirish')
-								.replace('Krithika', 'Kritika')
-								.replace('Moola', 'Moolam')
-						]
-					]
-				] || {}
-			);
+			return num_status[tarabalam[where_taras[selected_star]][where_taras[converted_nak]]] || {};
 		} catch (error) {
 			return {};
 		}
