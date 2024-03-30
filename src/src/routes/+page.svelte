@@ -125,6 +125,7 @@
 	};
 
 	let naks_names_in_order = [
+		// https://en.wikipedia.org/wiki/List_of_Nakshatras
 		'Ashwini',
 		'Bharani',
 		'Kritika',
