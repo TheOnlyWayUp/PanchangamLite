@@ -12,7 +12,7 @@ const config = {
     themes: [
       "light",
       "dark",
-      "nord"
+      "bumblebee"
     ],
   },
 
