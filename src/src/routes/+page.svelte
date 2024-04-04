@@ -130,7 +130,7 @@
 		{#if new Date($date).setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)}
 			<div transition:fade={{ delay: 100, duration: 100 }}>
 				{#if current_score == 2}
-					<div class="grid w-screen place-items-center bg-[#0028ff] p-4 text-center">
+					<div class="grid w-screen place-items-center bg-[#0f28b8] p-4 text-center">
 						<div class="max-w-sm">
 							<h1 class="text-3xl font-bold text-[#ffd700]">Excellent Time</h1>
 							<p class="text-xl text-white">You have {remaining_time} left.</p>
@@ -140,17 +140,19 @@
 						</div>
 					</div>
 				{:else if current_score == 1}
-					<div class="grid w-screen place-items-center bg-purple-300 p-4 text-center">
+					<div class="grid w-screen place-items-center bg-[#283fc0] p-4 text-center">
 						<div class="max-w-sm">
-							<h1 class="text-3xl font-bold text-green-600">Good Time</h1>
-							<p class="text-xl">You have {remaining_time} left.</p>
-							<p>
+							<h1 class="text-3xl font-bold text-green-400">Good Time</h1>
+							<p class="text-xl text-white">You have {remaining_time} left.</p>
+							<p class="text-neutral-content">
 								It's a great time to start something new, or to undertake a task with risk involved.
 							</p>
 						</div>
 					</div>
 				{:else if current_score == -1}
-					<div class="grid w-screen place-items-center bg-red-700 p-4 text-center">
+					<div
+						class="text-neutral-content grid w-screen place-items-center bg-red-700 p-4 text-center"
+					>
 						<div class="max-w-sm">
 							<h1 class="text-3xl font-bold text-amber-500">Bad Time</h1>
 							<p class="text-xl">You have {remaining_time} left.</p>
@@ -158,7 +160,9 @@
 						</div>
 					</div>
 				{:else if current_score == -2}
-					<div class="grid w-screen place-items-center bg-red-900 p-4 text-center">
+					<div
+						class="text-neutral-content grid w-screen place-items-center bg-red-900 p-4 text-center"
+					>
 						<div class="max-w-sm">
 							<h1 class="text-3xl font-bold text-amber-700">Dangerous Time</h1>
 							<p class="text-xl">You have {remaining_time} left.</p>
