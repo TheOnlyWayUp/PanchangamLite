@@ -9,7 +9,7 @@
 	</div>
 	<select class="select select-bordered select-info" bind:value={$nakshatram}>
 		<option disabled selected>Nakshatram</option>
-		{#each Object.keys(nakshatralu) as nakshatram}
+		{#each Object.keys(nakshatralu).sort() as nakshatram}
 			<option class="text-black">{nakshatram}</option>
 		{/each}
 	</select>

@@ -36,7 +36,8 @@
 	</div>
 	<select class="select select-bordered select-info" bind:value={$location}>
 		<option disabled selected>City</option>
-		{#each locations as location}
+		<option class="text-black">{locations[0]}</option>
+		{#each locations.slice(1).sort() as location}
 			<option class="text-black">{location}</option>
 		{/each}
 	</select>
