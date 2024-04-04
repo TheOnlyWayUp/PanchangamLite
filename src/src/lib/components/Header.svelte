@@ -13,7 +13,7 @@
 
 <div class="bg-base-100 grid place-items-center p-4">
 	<a class="my-2 text-2xl font-bold" href="/">Panchangam</a>
-	<p>{quotes[0]}</p>
+	<p>{quotes[(quotes.length * Math.random()) | 0]}</p>
 
 	{#if new Date($date).setHours(0, 0, 0, 0) != new Date().setHours(0, 0, 0, 0)}
 		<p class="animate-pulse font-semibold">
