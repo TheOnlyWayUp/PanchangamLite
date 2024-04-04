@@ -31,7 +31,7 @@
 			}}>{'<<'}</button
 		>
 		<details class="dropdown">
-			<summary class="btn m-1">{to_human_date($date)}</summary>
+			<summary class="btn m-1 w-fit text-nowrap">{to_human_date($date)}</summary>
 			<div class="dropdown-content z-[1]">
 				<DatePicker bind:value={$date} format="MM dd yyyy" placeholder={to_human_date($date)} />
 			</div>
