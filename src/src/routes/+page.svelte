@@ -11,11 +11,6 @@
 	} from '$lib/utils.js';
 	import { format, formatDistance, formatRelative, subDays } from 'date-fns';
 
-	function is_checking_today() {
-		// Isn't in utils because store subscription is easier in a svelte file
-		return new Date($date).setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0);
-	}
-
 	let current = [];
 	let current_score = 0;
 	let remaining_time = '';
@@ -108,6 +103,7 @@
 
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import { fade } from 'svelte/transition';
 
 	onMount(async (e) => {
 		await load_tarabalam_data_if_not_cached();
@@ -131,52 +127,55 @@
 	<Header />
 
 	<div class="flex-1">
-		{#if current_score == 2}
-			<div class="grid w-screen place-items-center bg-[#0028ff] p-4 text-center">
-				<div class="max-w-sm">
-					<h1 class="text-3xl font-bold text-[#ffd700]">Excellent Time</h1>
-					<p class="text-xl text-white">You have {remaining_time} left.</p>
-
-					<p class="text-neutral-content">
-						It's a great time to start something new, or to undertake a task with risk involved.
-					</p>
-				</div>
-			</div>
-		{:else if current_score == 1}
-			<div class="grid w-screen place-items-center bg-purple-300 p-4 text-center">
-				<div class="max-w-sm">
-					<h1 class="text-3xl font-bold text-green-600">Good Time</h1>
-					<p class="text-xl">You have {remaining_time} left.</p>
-
-					<p>
-						It's a great time to start something new, or to undertake a task with risk involved.
-					</p>
-				</div>
-			</div>
-		{:else if current_score == -1}
-			<div class="grid w-screen place-items-center bg-red-700 p-4 text-center">
-				<div class="max-w-sm">
-					<h1 class="text-3xl font-bold text-amber-500">Bad Time</h1>
-					<p class="text-xl">You have {remaining_time} left.</p>
-
-					<p>Be careful, don't begin new or risky tasks.</p>
-				</div>
-			</div>
-		{:else if current_score == -2}
-			<div class="grid w-screen place-items-center bg-red-900 p-4 text-center">
-				<div class="max-w-sm">
-					<h1 class="text-3xl font-bold text-amber-700">Dangerous Time</h1>
-					<p class="text-xl">You have {remaining_time} left.</p>
-
-					<p>Be careful, don't begin new or risky tasks.</p>
-				</div>
+		{#if new Date($date).setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)}
+			<div transition:fade={{ delay: 100, duration: 100 }}>
+				{#if current_score == 2}
+					<div class="grid w-screen place-items-center bg-[#0028ff] p-4 text-center">
+						<div class="max-w-sm">
+							<h1 class="text-3xl font-bold text-[#ffd700]">Excellent Time</h1>
+							<p class="text-xl text-white">You have {remaining_time} left.</p>
+							<p class="text-neutral-content">
+								It's a great time to start something new, or to undertake a task with risk involved.
+							</p>
+						</div>
+					</div>
+				{:else if current_score == 1}
+					<div class="grid w-screen place-items-center bg-purple-300 p-4 text-center">
+						<div class="max-w-sm">
+							<h1 class="text-3xl font-bold text-green-600">Good Time</h1>
+							<p class="text-xl">You have {remaining_time} left.</p>
+							<p>
+								It's a great time to start something new, or to undertake a task with risk involved.
+							</p>
+						</div>
+					</div>
+				{:else if current_score == -1}
+					<div class="grid w-screen place-items-center bg-red-700 p-4 text-center">
+						<div class="max-w-sm">
+							<h1 class="text-3xl font-bold text-amber-500">Bad Time</h1>
+							<p class="text-xl">You have {remaining_time} left.</p>
+							<p>Be careful, don't begin new or risky tasks.</p>
+						</div>
+					</div>
+				{:else if current_score == -2}
+					<div class="grid w-screen place-items-center bg-red-900 p-4 text-center">
+						<div class="max-w-sm">
+							<h1 class="text-3xl font-bold text-amber-700">Dangerous Time</h1>
+							<p class="text-xl">You have {remaining_time} left.</p>
+							<p>Be careful, don't begin new or risky tasks.</p>
+						</div>
+					</div>
+				{/if}
 			</div>
 		{/if}
 
 		{#if !loading && $tarabalam_data[to_human_date($date)] != undefined}
 			{@const data = $tarabalam_data[to_human_date($date)]}
 
-			<div class="my-10 grid place-items-center space-y-5">
+			<div
+				class="my-10 grid place-items-center space-y-5"
+				transition:fade={{ delay: 100, duration: 100 }}
+			>
 				<div class="card bg-base-100 w-96 shadow-xl">
 					<div class="card-body">
 						<h2 class="card-title justify-center">Nakshatralu</h2>
