@@ -32,7 +32,7 @@
 
 <label class="form-control w-full max-w-xs">
 	<div class="label">
-		<span class="label-text">Location</span>
+		<span class="label-text">Current Location</span>
 	</div>
 	<select class="select select-bordered select-info" bind:value={$location}>
 		<option disabled selected>City</option>
