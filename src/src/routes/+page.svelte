@@ -195,14 +195,14 @@
 									<span class="font-bold">{current_nakshatram}</span> ({metadata['compatability'][
 										'name'
 									]}: <span class="font-semibold">{metadata['compatability']['status']}</span>):
-									{format(metadata['start'], 'MMM do hh:mm a')}
-									- {format(metadata['end'], 'MMM do hh:mm a')}
+									{format(metadata['start'], 'E MMM do hh:mm a')}
+									- {format(metadata['end'], 'E MMM do hh:mm a')}
 									{#if is_in_time_range(new Date(), metadata['start'], metadata['end'])}
 										<span class="font-bold">CURRENT</span>
 									{:else}
 										<span
 											class="tooltip underline"
-											data-tip={format(metadata['start'], 'MMM do hh:mm a')}
+											data-tip={format(metadata['start'], 'E MMM do hh:mm a')}
 											>({formatDistance(metadata['start'], new Date(), { addSuffix: true })})</span
 										>
 									{/if}
