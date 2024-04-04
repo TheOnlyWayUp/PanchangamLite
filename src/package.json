@@ -30,6 +30,7 @@
 	"type": "module",
 	"dependencies": {
 		"date-fns": "^3.6.0",
+		"date-picker-svelte": "^2.11.0",
 		"jsdom": "^24.0.0",
 		"svelte-persisted-store": "^0.9.1",
 		"svelte-preprocess": "^5.1.3",

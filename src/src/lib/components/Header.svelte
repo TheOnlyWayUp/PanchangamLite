@@ -1,6 +1,7 @@
 <script>
 	import { date } from '$lib/stores.js';
 	import { to_human_date } from '$lib/utils.js';
+	import { DatePicker, DateInput } from 'date-picker-svelte';
 </script>
 
 <div class="bg-base-100 grid place-items-center p-4">
@@ -13,7 +14,7 @@
 			>
 		</p>
 	{/if}
-	<div class="grid grid-cols-3">
+	<div class="mt-2 grid grid-cols-3">
 		<button
 			class="text-amber-600 transition-all hover:underline"
 			on:click={(e) => {
@@ -21,9 +22,12 @@
 				$date = $date;
 			}}>{'<<'}</button
 		>
-		<div class="underline">
-			{to_human_date($date)}
-		</div>
+		<details class="dropdown">
+			<summary class="btn m-1">{to_human_date($date)}</summary>
+			<div class="dropdown-content z-[1]">
+				<DatePicker bind:value={$date} format="MM dd yyyy" placeholder={to_human_date($date)} />
+			</div>
+		</details>
 		<button
 			class="text-amber-600 transition-all hover:underline"
 			on:click={(e) => {
