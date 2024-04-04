@@ -9,7 +9,7 @@
 		compatability,
 		is_in_time_range
 	} from '$lib/utils.js';
-	import { format, formatDistance, formatRelative, subDays } from 'date-fns';
+	import { format, formatDistance } from 'date-fns';
 
 	let current = [];
 	let current_score = 0;

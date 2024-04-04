@@ -2,6 +2,7 @@
 	import { date, date_dropdown_open } from '$lib/stores.js';
 	import { to_human_date } from '$lib/utils.js';
 	import { DatePicker } from 'date-picker-svelte';
+	import { format, subDays, addDays } from 'date-fns';
 
 	let quotes = [
 		'Regardless, the Supreme watches over us.',
@@ -33,12 +34,12 @@
 			on:click={(e) => {
 				$date.setDate($date.getDate() - 1); // Thanks https://stackoverflow.com/a/9444776
 				$date = $date;
-			}}>{to_human_date(new Date().setDate($date.getDate() - 1))}</button
+			}}>{format(subDays($date, 1), 'E MMM dd')}</button
 		>
 		<details class="dropdown" bind:open={$date_dropdown_open}>
-			<summary class="btn m-1 w-fit text-nowrap">{to_human_date($date)}</summary>
+			<summary class="btn m-1 w-fit text-nowrap">{format($date, 'E MMM dd')}</summary>
 			<div class="dropdown-content z-[1]">
-				<DatePicker bind:value={$date} format="MM dd yyyy" placeholder={to_human_date($date)} />
+				<DatePicker bind:value={$date} format="MM dd yyyy" />
 			</div>
 		</details>
 		<button
@@ -46,7 +47,7 @@
 			on:click={(e) => {
 				$date.setDate($date.getDate() + 1);
 				$date = $date;
-			}}>{to_human_date(new Date().setDate($date.getDate() + 1))}</button
+			}}>{format(addDays($date, 1), 'E MMM dd')}</button
 		>
 	</div>
 	<!-- Thanks https://stackoverflow.com/a/71439534 ! -->
