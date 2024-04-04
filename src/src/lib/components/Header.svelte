@@ -1,7 +1,7 @@
 <script>
-	import { date } from '$lib/stores.js';
+	import { date, date_dropdown_open } from '$lib/stores.js';
 	import { to_human_date } from '$lib/utils.js';
-	import { DatePicker, DateInput } from 'date-picker-svelte';
+	import { DatePicker } from 'date-picker-svelte';
 
 	let quotes = [
 		'Regardless, the Supreme watches over us.',
@@ -9,6 +9,11 @@
 		'The Supreme protects us.',
 		'The gaze of Mother Goddess eradicates evil.'
 	];
+
+	$: {
+		$date;
+		$date_dropdown_open = false;
+	}
 </script>
 
 <div class="bg-base-100 grid place-items-center p-4">
@@ -28,9 +33,9 @@
 			on:click={(e) => {
 				$date.setDate($date.getDate() - 1); // Thanks https://stackoverflow.com/a/9444776
 				$date = $date;
-			}}>{'<<'}</button
+			}}>{to_human_date(new Date().setDate($date.getDate() - 1))}</button
 		>
-		<details class="dropdown">
+		<details class="dropdown" bind:open={$date_dropdown_open}>
 			<summary class="btn m-1 w-fit text-nowrap">{to_human_date($date)}</summary>
 			<div class="dropdown-content z-[1]">
 				<DatePicker bind:value={$date} format="MM dd yyyy" placeholder={to_human_date($date)} />
@@ -41,7 +46,7 @@
 			on:click={(e) => {
 				$date.setDate($date.getDate() + 1);
 				$date = $date;
-			}}>{'>>'}</button
+			}}>{to_human_date(new Date().setDate($date.getDate() + 1))}</button
 		>
 	</div>
 	<!-- Thanks https://stackoverflow.com/a/71439534 ! -->
