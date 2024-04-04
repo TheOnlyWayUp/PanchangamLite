@@ -2,10 +2,18 @@
 	import { date } from '$lib/stores.js';
 	import { to_human_date } from '$lib/utils.js';
 	import { DatePicker, DateInput } from 'date-picker-svelte';
+
+	let quotes = [
+		'Regardless, the Supreme watches over us.',
+		"The Supreme's blessings are always with us.",
+		'The Supreme protects us.',
+		'The gaze of Mother Goddess eradicates evil.'
+	];
 </script>
 
 <div class="bg-base-100 grid place-items-center p-4">
 	<a class="my-2 text-2xl font-bold" href="/">Panchangam</a>
+	<p>{quotes[0]}</p>
 
 	{#if new Date($date).setHours(0, 0, 0, 0) != new Date().setHours(0, 0, 0, 0)}
 		<p class="animate-pulse font-semibold">
@@ -38,3 +46,21 @@
 	</div>
 	<!-- Thanks https://stackoverflow.com/a/71439534 ! -->
 </div>
+<!-- <div class="grid place-items-center">
+	<div role="alert" class="alert bg-gradient-to-tr from-cyan-300 via-orange-300 to-blue-500">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			class="stroke-info h-6 w-6 shrink-0"
+			><path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+			></path></svg
+		>
+		<span>We've launched a podcast!</span>
+		<a href="..." class="btn btn-primary" target="_blank">Visit</a>
+	</div>
+</div> -->
