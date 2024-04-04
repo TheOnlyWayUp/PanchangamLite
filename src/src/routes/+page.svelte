@@ -277,7 +277,7 @@
 			<!-- --- -->
 		{:else}
 			<div class="m-10 flex-1">
-				<h1 class="flex justify-center text-center text-3xl text-white">
+				<h1 class="flex justify-center text-center text-6xl text-white">
 					<div class="w-fit rounded-full bg-slate-700 p-4">
 						<span class="animate-pulse" style="font-family: hindi;">ॐ</span>
 					</div>
