@@ -16,6 +16,14 @@
 	let remaining_time = '';
 	let loading = true;
 
+	if (!String.prototype.strip) {
+		// ! Thanks https://stackoverflow.com/a/20890838
+		String.prototype.strip = function (string) {
+			var escaped = string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
+			return this.replace(RegExp('^[' + escaped + ']+|[' + escaped + ']+$', 'gm'), '');
+		};
+	}
+
 	async function load_tarabalam_data_if_not_cached(break_cache = false) {
 		loading = true;
 
@@ -34,8 +42,8 @@
 				if (start && end) {
 					// value exists and is not 'Nil' as per server
 					nakshatralu[key] = {
-						start: parse(start, 'MMM dd hh:mm a', new Date()),
-						end: parse(end, 'MMM dd hh:mm a', new Date()),
+						start: parse(start.strip(' '), 'MMM dd hh:mm a', new Date()),
+						end: parse(end.strip(' '), 'MMM dd hh:mm a', new Date()),
 						compatability: compatability[get_nakshatralu_compatability($nakshatram, key)],
 						score: compatability[get_nakshatralu_compatability($nakshatram, key)]['score']
 					};
