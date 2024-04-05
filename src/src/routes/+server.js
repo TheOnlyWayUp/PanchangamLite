@@ -16,8 +16,6 @@ export async function GET(event) {
     let response = await fetch(url)
     let html = await response.text()
 
-    console.log(html)
-
     const { JSDOM } = jsdom
 
     let dom = new JSDOM(html)

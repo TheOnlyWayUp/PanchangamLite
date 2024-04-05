@@ -9,7 +9,7 @@
 		compatability,
 		is_in_time_range
 	} from '$lib/utils.js';
-	import { format, formatDistance } from 'date-fns';
+	import { format, formatDistance, parse } from 'date-fns';
 
 	let current = [];
 	let current_score = 0;
@@ -34,8 +34,8 @@
 				if (start && end) {
 					// value exists and is not 'Nil' as per server
 					nakshatralu[key] = {
-						start: new Date(start),
-						end: new Date(end),
+						start: parse(start, 'MMM dd hh:mm a', new Date()),
+						end: parse(end, 'MMM dd hh:mm a', new Date()),
 						compatability: compatability[get_nakshatralu_compatability($nakshatram, key)],
 						score: compatability[get_nakshatralu_compatability($nakshatram, key)]['score']
 					};
