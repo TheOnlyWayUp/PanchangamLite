@@ -12,8 +12,11 @@
 	import { format, formatDistance, parse } from 'date-fns';
 
 	let current = [];
-	let current_score = 0;
-	let remaining_time = '';
+	let current_data = {
+		score: 0,
+		remaining: 0,
+		name: ''
+	};
 	let loading = true;
 	let key = true;
 
@@ -43,6 +46,7 @@
 				if (start && end) {
 					// value exists and is not 'Nil' as per server
 					nakshatralu[key] = {
+						name: `${key} Nakshatram`,
 						start: parse(start.strip(' '), 'MMM dd hh:mm a', new Date()),
 						end: parse(end.strip(' '), 'MMM dd hh:mm a', new Date()),
 						compatability: compatability[get_nakshatralu_compatability($nakshatram, key)],
@@ -61,6 +65,7 @@
 				if (start && end) {
 					// value exists and is not 'Nil' as per server
 					good_times[key] = {
+						name: key,
 						start: new Date(`${to_human_date($date)} ${start}`),
 						end: new Date(`${to_human_date($date)} ${end}`),
 						score: 2
@@ -78,6 +83,7 @@
 				if (start && end) {
 					// value exists and is not 'Nil' as per server
 					bad_times[key] = {
+						name: key,
 						start: new Date(`${to_human_date($date)} ${start}`),
 						end: new Date(`${to_human_date($date)} ${end}`),
 						score: -1
@@ -97,14 +103,14 @@
 		}
 
 		current.forEach((el) => {
-			if (Math.abs(el.score) > current_score) {
-				current_score = el.score;
-				remaining_time = (el.end - new Date()) / 60000; // Thanks https://stackoverflow.com/a/24316516 !
-				remaining_time = formatDistance(el.end, new Date(), { addSuffix: false });
+			if (Math.abs(el.score) > current_data.score) {
+				current_data.score = el.score;
+				current_data.remaining = formatDistance(el.end, new Date(), { addSuffix: false });
+				current_data.name = el.name;
 			}
 		});
 
-		console.log('Data loaded', $tarabalam_data, current, current_score);
+		console.log('Data loaded', $tarabalam_data, current, current_data.score);
 
 		loading = false;
 		return $tarabalam_data[to_human_date($date)];
@@ -144,44 +150,56 @@
 	<div class="flex-1">
 		{#if new Date($date).setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)}
 			<div transition:fade={{ delay: 100, duration: 100 }}>
-				{#if current_score == 2}
+				{#if current_data.score == 2}
 					<div class="grid w-screen place-items-center bg-[#0f28b8] p-4 text-center">
 						<div class="max-w-sm">
 							<h1 class="text-3xl font-bold text-[#ffd700]">Excellent Time</h1>
-							<p class="text-xl text-white">You have {remaining_time} left.</p>
+							<p class="text-xl text-white">
+								You have {current_data.remaining} left.
+							</p>
 							<p class="text-neutral-content">
-								It's a great time to start something new, or to undertake a task with risk involved.
+								<span class="font-bold">{current_data.name}</span> - It's a great time to start something
+								new, or to undertake a task with risk involved.
 							</p>
 						</div>
 					</div>
-				{:else if current_score == 1}
+				{:else if current_data.score == 1}
 					<div class="grid w-screen place-items-center bg-[#283fc0] p-4 text-center">
 						<div class="max-w-sm">
 							<h1 class="text-3xl font-bold text-green-400">Good Time</h1>
-							<p class="text-xl text-white">You have {remaining_time} left.</p>
+							<p class="text-xl text-white">
+								You have {current_data.remaining} left.
+							</p>
 							<p class="text-neutral-content">
-								It's a great time to start something new, or to undertake a task with risk involved.
+								<span class="font-bold">{current_data.name}</span> - It's a great time to start something
+								new, or to undertake a task with risk involved.
 							</p>
 						</div>
 					</div>
-				{:else if current_score == -1}
+				{:else if current_data.score == -1}
 					<div
 						class="text-neutral-content grid w-screen place-items-center bg-red-700 p-4 text-center"
 					>
 						<div class="max-w-sm">
 							<h1 class="text-3xl font-bold text-amber-500">Bad Time</h1>
-							<p class="text-xl">You have {remaining_time} left.</p>
-							<p>Be careful, don't begin new or risky tasks.</p>
+							<p class="text-xl">You have {current_data.remaining} left.</p>
+							<p>
+								<span class="font-bold">{current_data.name}</span> - Be careful, don't begin new or risky
+								tasks.
+							</p>
 						</div>
 					</div>
-				{:else if current_score == -2}
+				{:else if current_data.score == -2}
 					<div
 						class="text-neutral-content grid w-screen place-items-center bg-red-900 p-4 text-center"
 					>
 						<div class="max-w-sm">
 							<h1 class="text-3xl font-bold text-amber-700">Dangerous Time</h1>
-							<p class="text-xl">You have {remaining_time} left.</p>
-							<p>Be careful, don't begin new or risky tasks.</p>
+							<p class="text-xl">You have {current_data.remaining} left.</p>
+							<p>
+								<span class="font-bold">{current_data.name}</span> - Be careful, don't begin new or risky
+								tasks.
+							</p>
 						</div>
 					</div>
 				{/if}
