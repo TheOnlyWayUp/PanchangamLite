@@ -222,6 +222,12 @@
 										metadata['start'],
 										metadata['end']
 									)}
+									class:p-2={is_in_time_range(new Date(), metadata['start'], metadata['end'])}
+									class:rounded-sm={is_in_time_range(
+										new Date(),
+										metadata['start'],
+										metadata['end']
+									)}
 								>
 									<span class="font-bold">{current_nakshatram}</span> ({metadata['compatability'][
 										'name'
@@ -255,6 +261,12 @@
 										metadata['start'],
 										metadata['end']
 									)}
+									class:p-2={is_in_time_range(new Date(), metadata['start'], metadata['end'])}
+									class:rounded-sm={is_in_time_range(
+										new Date(),
+										metadata['start'],
+										metadata['end']
+									)}
 								>
 									<span class="font-bold">{name}</span> :
 									{format(metadata['start'], 'hh:mm a')}
@@ -283,6 +295,12 @@
 							{#each Object.entries(data['bad_times']) as [name, metadata]}
 								<div
 									class:bg-slate-100={is_in_time_range(
+										new Date(),
+										metadata['start'],
+										metadata['end']
+									)}
+									class:p-2={is_in_time_range(new Date(), metadata['start'], metadata['end'])}
+									class:rounded-sm={is_in_time_range(
 										new Date(),
 										metadata['start'],
 										metadata['end']
