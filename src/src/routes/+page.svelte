@@ -15,6 +15,7 @@
 	let current_score = 0;
 	let remaining_time = '';
 	let loading = true;
+	let key = true;
 
 	if (!String.prototype.strip) {
 		// ! Thanks https://stackoverflow.com/a/20890838
@@ -129,6 +130,12 @@
 			load_tarabalam_data_if_not_cached(true);
 		}
 	}
+	$: {
+		$nakshatram;
+		if (browser) {
+			load_tarabalam_data_if_not_cached(true); // Tecdhnically we don't have the make the request again, but this saves effort.
+		}
+	}
 </script>
 
 <div class="flex min-h-screen flex-grow flex-col">
@@ -180,10 +187,8 @@
 				{/if}
 			</div>
 		{/if}
-
 		{#if !loading && $tarabalam_data[to_human_date($date)] != undefined}
 			{@const data = $tarabalam_data[to_human_date($date)]}
-
 			<div
 				class="my-10 grid place-items-center space-y-5"
 				transition:fade={{ delay: 100, duration: 100 }}
@@ -211,7 +216,9 @@
 										<span
 											class="tooltip underline"
 											data-tip={format(metadata['start'], 'E MMM do hh:mm a')}
-											>({formatDistance(metadata['start'], new Date(), { addSuffix: true })})</span
+											>({formatDistance(metadata['start'], new Date(), {
+												addSuffix: true
+											})})</span
 										>
 									{/if}
 								</div>
@@ -240,7 +247,9 @@
 										<span
 											class="tooltip underline"
 											data-tip={format(metadata['start'], 'MMM do hh:mm a')}
-											>({formatDistance(metadata['start'], new Date(), { addSuffix: true })})</span
+											>({formatDistance(metadata['start'], new Date(), {
+												addSuffix: true
+											})})</span
 										>
 									{/if}
 								</div>
@@ -270,7 +279,9 @@
 										<span
 											class="tooltip underline"
 											data-tip={format(metadata['start'], 'MMM do hh:mm a')}
-											>({formatDistance(metadata['start'], new Date(), { addSuffix: true })})</span
+											>({formatDistance(metadata['start'], new Date(), {
+												addSuffix: true
+											})})</span
 										>
 									{/if}
 								</div>
@@ -279,10 +290,6 @@
 					</div>
 				</div>
 			</div>
-
-			<!-- --- -->
-
-			<!-- --- -->
 		{:else}
 			<div class="m-10 flex-1">
 				<h1 class="flex justify-center text-center text-6xl text-white">
