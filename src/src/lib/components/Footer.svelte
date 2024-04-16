@@ -13,7 +13,8 @@
 		Copyright © 2024 - All rights reserved by <a
 			href="https://rambhat.la"
 			style="text-decoration: underline"
-			class=" transition-all hover:text-purple-300 hover:underline-offset-2">Dhanush Rambhatla</a
+			class=" transition-all hover:text-purple-300 hover:underline-offset-2"
+			data-umami-event="About Me">Dhanush Rambhatla</a
 		>
 	</p>
 

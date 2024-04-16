@@ -34,9 +34,10 @@
 			on:click={(e) => {
 				$date.setDate($date.getDate() - 1); // Thanks https://stackoverflow.com/a/9444776
 				$date = $date;
-			}}>{format(subDays($date, 1), 'E MMM dd')}</button
+			}}
+			data-umami-event="Previous Day">{format(subDays($date, 1), 'E MMM dd')}</button
 		>
-		<details class="dropdown" bind:open={$date_dropdown_open}>
+		<details class="dropdown" bind:open={$date_dropdown_open} data-umami-event="Toggle Calendar">
 			<summary class="btn m-1 w-fit text-nowrap">{format($date, 'E MMM dd')}</summary>
 			<div class="dropdown-content z-[1]">
 				<DatePicker bind:value={$date} format="MM dd yyyy" />
@@ -47,7 +48,8 @@
 			on:click={(e) => {
 				$date.setDate($date.getDate() + 1);
 				$date = $date;
-			}}>{format(addDays($date, 1), 'E MMM dd')}</button
+			}}
+			data-umami-event="Next Day">{format(addDays($date, 1), 'E MMM dd')}</button
 		>
 	</div>
 	<!-- Thanks https://stackoverflow.com/a/71439534 ! -->

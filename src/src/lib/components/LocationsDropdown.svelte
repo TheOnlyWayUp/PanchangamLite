@@ -34,7 +34,11 @@
 	<div class="label">
 		<span class="label-text">Current Location</span>
 	</div>
-	<select class="select select-bordered select-info" bind:value={$location}>
+	<select
+		class="select select-bordered select-info"
+		bind:value={$location}
+		data-umami-event="Change Location"
+	>
 		<option disabled selected>City</option>
 		<option class="text-black">{locations[0]}</option>
 		{#each locations.slice(1).sort() as location}

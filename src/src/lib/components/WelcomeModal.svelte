@@ -28,7 +28,11 @@
 		<div class="modal-action justify-center">
 			<form method="dialog">
 				<!-- if there is a button in form, it will close the modal -->
-				<button class="btn btn-primary" disabled={!($nakshatram && $location)}>Check</button>
+				<button
+					class="btn btn-primary"
+					disabled={!($nakshatram && $location)}
+					data-umami-event="Dismiss Welcome">Check</button
+				>
 			</form>
 		</div>
 	</div>
